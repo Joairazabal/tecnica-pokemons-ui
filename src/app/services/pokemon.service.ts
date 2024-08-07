@@ -5,22 +5,22 @@ import { Observable, throwError } from 'rxjs';
 import Pokemon from '../models/pokemon.model';
 import Page from '../models/page.model';
 import DetailPokemon from '../models/detailPokemon.model';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class PokemonService {
 
-  // private apiUrl="http://15.229.5.174/api/v1/pokemon";
-  private apiUrl = "http://localhost:8080/api/v1/pokemon";
+  private apiUrl = environment.apiUrl + "/api/v1/pokemon";
 
 
   constructor(private http: HttpClient) { }
 
   getAllPokemons(): Observable<Page<Pokemon>> {
+
     return this.http.get<Page<Pokemon>>(this.apiUrl).pipe(
       retry(1),
       map((response: any) => {
-        // Mapear la respuesta a un objeto del tipo Page<Pokemon>
         return {
           count: response.count,
           next: response.next,
