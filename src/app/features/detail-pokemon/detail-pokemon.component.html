@@ -1,0 +1,70 @@
+<section class="w-full flex flex-col items-center">
+  <div class="w-full flex">
+    <a href="/" class="flex gap-1 items-center text-3xl font-extrabold"
+      ><svg
+        class="w-12 h-12 text-gray-800 dark:text-white hover:scale-105 duration-300"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M5 12h14M5 12l4-4m-4 4 4 4"
+        />
+      </svg>
+      Volver</a
+    >
+  </div>
+  <div class="grid grid-cols-2 w-[80%] gap-x-12 gap-y-10 mt-4">
+    <img
+      src="{{ detailPokemon?.url }}"
+      alt="{{ detailPokemon?.name }}"
+      class="w-full h-full object-cover"
+    />
+    <div class="flex flex-col gap-4">
+      <h2 class="font-bold text-2xl tracking-wider">
+        {{ detailPokemon?.name }}
+      </h2>
+      <p class="text-justify">{{ detailPokemon?.description }}</p>
+      <div class="flex gap-2">
+        <span class="font-bold">Weight:</span>{{ detailPokemon?.weight }} ⚖️
+      </div>
+      <div class="flex gap-2">
+        <span class="font-bold">Types:</span>
+        <div *ngFor="let type of detailPokemon?.types" class="text-start">
+          {{ type }}
+        </div>
+      </div>
+      <div class="flex gap-2">
+        <span class="font-bold">Abilities:</span>
+        <div
+          *ngFor="let ability of detailPokemon?.abilities"
+          class="text-start"
+        >
+          {{ ability }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <ul class="flex flex-wrap gap-1 tracking-wide w-full mt-10">
+    <span class="font-bold mr-1">Moves:</span>
+    <li
+      *ngFor="let move of detailPokemon?.moves; let i = index"
+      class="text-start"
+    >
+      {{ move }}
+      <span *ngIf="detailPokemon?.moves && i < detailPokemon.moves.length - 1"
+        >,</span
+      >
+      <span *ngIf="detailPokemon?.moves && i == detailPokemon.moves.length - 1"
+        >.</span
+      >
+    </li>
+  </ul>
+</section>

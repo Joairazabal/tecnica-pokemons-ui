@@ -1,0 +1,42 @@
+<div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+<div *ngIf="!errorMessage" class="w-full">
+  <div *ngIf="loaded">
+    <div class="flex justify-center items-center w-full">
+      <app-loader></app-loader>
+    </div>
+  </div>
+  <ul class="flex flex-wrap gap-4 w-[80%]" *ngIf="!loaded">
+    <li
+      (click)="viewDetails(pokemon.name)"
+      *ngFor="let pokemon of page.results"
+      class="rounded-xl bg-slate-800 border text-center py-4 shadow-lg shadow-slate-500 hover:shadow-lg hover:shadow-slate-700 cursor-pointer px-4 w-[18vw] h-[60vh]"
+    >
+      <img
+        src="{{ pokemon.url }}"
+        alt="{{ pokemon.name }}"
+        class="w-full h-48"
+      />
+      <span class="font-extrabold tracking-wider text-xl">
+        {{ pokemon.name }}
+      </span>
+      <div class="grid grid-cols-2 gap-4 justify-items-center mt-2">
+        <div class="flex flex-col gap-2">
+          <span class="font-bold">Type:</span>
+          <div *ngFor="let type of pokemon.types" class="text-start">
+            • {{ type }}
+          </div>
+        </div>
+        <div class="flex flex-col gap-2">
+          <span class="font-bold">Abilities:</span>
+          <div *ngFor="let ability of pokemon.abilities" class="text-start">
+            • {{ ability }}
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-center gap-2 mt-3">
+        <span class="font-bold">Weight:</span>{{ pokemon.weight }} ⚖️
+      </div>
+    </li>
+  </ul>
+</div>
